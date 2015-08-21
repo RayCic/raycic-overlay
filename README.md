@@ -1,2 +1,2 @@
 # raycic-overlay
-Raimonds Cicans personal Gentoo overlay
+Raimonds Cicans personal Gentoo overlay.
