@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer>
+		<email>ray@apollo.lv</email>
+		<name>Raimonds Cicans</name>
+	</maintainer>
+	<use>
+		<flag name='opengl'>Build OSD based on opengl</flag>
+		<flag name='gles'>Build OSD based on gles2</flag>
+	</use>
+	<upstream>
+		<bugs-to>https://github.com/kodi-pvr/pvr.vdr.vnsi/issues</bugs-to>
+		<changelog>https://github.com/kodi-pvr/pvr.vdr.vnsi/commits/master</changelog>
+		<remote-id type="github">kodi-pvr/pvr.vdr.vnsi</remote-id>
+	</upstream>
+</pkgmetadata>
