@@ -80,37 +80,44 @@ kodi-pvr-plugins_src_configure() {
 
 # Delete unneeded LINGUAS and warn about unsupported
 kodi-pvr-plugins_src_prepare() {
-	cd $upstream_pn/resources/language || die
+	local langdir="${upstream_pn}/resources/language"
 
-	shopt -s nocasematch
+	if [ -d "${langdir}" ]; then
 
-	local found_linguas=""
+		cd "${langdir}"
 
-	for f in *; do
-		local lang=${f#resource.language.}
-		local found=0
+		shopt -s nocasematch
+
+		local found_linguas=""
+
+		for f in resource.language.*; do
+			local lang=${f#resource.language.}
+			local found=0
+
+			for l in ${LINGUAS}; do
+				if [[ ${lang} == ${l}* ]]; then
+					found=1
+					found_linguas+=" ${l}"
+				fi
+			done
+
+			[ ${found} -eq 1 ] || rm -rf "${f}" || die
+		done
+
+		shopt -u nocasematch
+
+		local not_found_linguas=""
 
 		for l in ${LINGUAS}; do
-			if [[ ${lang} == ${l}* ]]; then
-				found=1
-				found_linguas+=" ${l}"
-			fi
+			for f in ${found_linguas}; do
+				[ "${l}" == "${f}" ] && continue 2
+			done
+
+			not_found_linguas+=" ${l}"
 		done
 
-		[ ${found} -eq 1 ] || rm -rf "${f}" || die
-	done
-
-	shopt -u nocasematch
-
-	local not_found_linguas=""
-
-	for l in ${LINGUAS}; do
-		for f in ${found_linguas}; do
-			[ "${l}" == "${f}" ] && continue 2
-		done
-
-		not_found_linguas+=" ${l}"
-	done
-
-	[ -z "${not_found_linguas}" ] || ewarn "Not supported LINGUAS:${not_found_linguas}"
+		[ -z "${not_found_linguas}" ] || ewarn "Not supported LINGUAS:${not_found_linguas}"
+	else
+		ewarn "Ebuild do not support LINGUAS at all"
+	fi
 }
