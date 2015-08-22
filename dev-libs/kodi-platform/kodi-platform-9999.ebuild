@@ -14,5 +14,7 @@ EGIT_REPO_URI="https://github.com/xbmc/kodi-platform.git"
 LICENSE="GPL-2+"
 SLOT="0"
 
-DEPEND="dev-libs/libplatform"
-RDEPEND=""
+RDEPEND="media-tv/kodi"
+
+DEPEND="${RDEPEND}
+	dev-libs/libplatform"
