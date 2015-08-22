@@ -8,7 +8,7 @@ Raimonds Cicans personal Gentoo overlay.
 How to install:
    1. add overlay as described above
    2. copy `/var/lib/layman/raycic-overlay/distfiles/kodi-15.*-generated-addons.tar.xz` to your distfiles directory (in most cases this is `/usr/portage/distfiles`)
-   3. add `=media-tv/kodi-15*` to /etc/portage/package.keywords
+   3. add `=media-tv/kodi-15*` to `/etc/portage/package.keywords`
    4. run `emerge media-tv/kodi`
 
 ## Kodi PVR plugins' ebuilds - media-plugins/kodi-pvr-*
