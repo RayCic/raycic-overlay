@@ -26,19 +26,31 @@ esac
 upstream_pn=${PN#kodi-}
 upstream_pn=${upstream_pn//-/.}
 
-if [[ ${PV} == "9999" ]] ; then
-	EGIT_REPO_URI="https://github.com/kodi-pvr/${upstream_pn}.git"
-	EGIT_BRANCH="Isengard"
-	inherit git-r3
-else
-	SRC_URI="https://github.com/kodi-pvr/${upstream_pn}/archive/${PV}.tar.gz -> ${P}.tar.gz"
-fi
+local my_depend=""
 
+case "${PV:-0}" in
+	"15.9999")
+		EGIT_REPO_URI="https://github.com/kodi-pvr/${upstream_pn}.git"
+		EGIT_BRANCH="Isengard"
+		my_depend="=media-tv/kodi-15*"
+		inherit git-r3
+		;;
+	"9999")
+		EGIT_REPO_URI="https://github.com/kodi-pvr/${upstream_pn}.git"
+		my_depend="=media-tv/kodi-9999"
+		inherit git-r3
+		;;
+	*)
+		die "Version=\"${PV}\" is not supported"
+		;;
+esac
+
+IUSE="debug"
 LICENSE="GPL-2+"
 SLOT="0"
 
 DEPEND="dev-libs/kodi-platform
-	>=media-tv/kodi-15"
+	${my_depend}"
 
 RDEPEND="${DEPEND}
 	!media-plugins/xbmc-addon-pvr"
@@ -52,6 +64,16 @@ kodi-pvr-plugins_src_configure() {
 	mycmakeargs+=(
 		-DCMAKE_INSTALL_LIBDIR="${EPREFIX}"/usr/$(get_libdir)/kodi
 	)
+
+	if use debug; then
+		mycmakeargs+=(
+			-DCMAKE_BUILD_TYPE=Debug
+		)
+	else
+		mycmakeargs+=(
+			-DCMAKE_BUILD_TYPE=Release
+		)
+	fi
 
 	cmake-utils_src_configure
 }
