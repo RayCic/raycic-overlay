@@ -80,7 +80,7 @@ kodi-pvr-plugins_src_configure() {
 
 # Delete unneeded LINGUAS and warn about unsupported
 kodi-pvr-plugins_src_prepare() {
-	cd $upstream_pn/resources/language
+	cd $upstream_pn/resources/language || die
 
 	shopt -s nocasematch
 
