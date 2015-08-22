@@ -8,5 +8,3 @@ inherit kodi-pvr-plugins
 
 DESCRIPTION="MythTV PVR for Kodi"
 HOMEPAGE="https://github.com/kodi-pvr/pvr.mythtv"
-
-[[ ${PV} == *9999 ]] || KEYWORDS="~amd64"

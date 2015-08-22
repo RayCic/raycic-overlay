@@ -8,5 +8,3 @@ inherit kodi-pvr-plugins
 
 DESCRIPTION="Kodi's Tvheadend HTSP client addon"
 HOMEPAGE="https://github.com/kodi-pvr/pvr.hts"
-
-[[ ${PV} == *9999 ]] || KEYWORDS="~amd64"

@@ -8,5 +8,3 @@ inherit kodi-pvr-plugins
 
 DESCRIPTION="Kodi VBox TV Gateway PVR addon"
 HOMEPAGE="https://github.com/kodi-pvr/pvr.vbox"
-
-[[ ${PV} == *9999 ]] || KEYWORDS="~amd64"

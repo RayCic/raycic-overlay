@@ -9,8 +9,6 @@ inherit kodi-pvr-plugins
 DESCRIPTION="Kodi PVR addon VNSI"
 HOMEPAGE="https://github.com/kodi-pvr/pvr.vdr.vnsi"
 
-[[ ${PV} == *9999 ]] || KEYWORDS="~amd64"
-
 IUSE="+opengl gles"
 
 REQUIRED_USE="opengl? ( !gles )"

@@ -8,5 +8,3 @@ inherit kodi-pvr-plugins
 
 DESCRIPTION="Kodi's Windows Media Center client addon"
 HOMEPAGE="https://github.com/kodi-pvr/pvr.wmc"
-
-[[ ${PV} == *9999 ]] || KEYWORDS="~amd64"

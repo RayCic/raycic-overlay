@@ -4,18 +4,12 @@
 
 EAPI=5
 
-inherit cmake-utils
+inherit git-r3 cmake-utils
 
 DESCRIPTION="Kodi platform support library"
 HOMEPAGE="https://github.com/xbmc/kodi-platform"
 
-if [[ ${PV} == "9999" ]] ; then
-	EGIT_REPO_URI="https://github.com/xbmc/kodi-platform.git"
-	inherit git-r3
-else
-	SRC_URI="https://github.com/xbmc/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64"
-fi
+EGIT_REPO_URI="https://github.com/xbmc/kodi-platform.git"
 
 LICENSE="GPL-2+"
 SLOT="0"

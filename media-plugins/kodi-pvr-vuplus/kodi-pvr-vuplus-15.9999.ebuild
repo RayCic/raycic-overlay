@@ -9,8 +9,6 @@ inherit kodi-pvr-plugins
 DESCRIPTION="Kodi's VuPlus client addon"
 HOMEPAGE="https://github.com/kodi-pvr/pvr.vuplus"
 
-[[ ${PV} == *9999 ]] || KEYWORDS="~amd64"
-
 DEPEND="dev-libs/tinyxml"
 
 RDEPEND="${DEPEND}"

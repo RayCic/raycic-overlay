@@ -9,8 +9,6 @@ inherit kodi-pvr-plugins
 DESCRIPTION="Kodi's Filmon client addon"
 HOMEPAGE="https://github.com/kodi-pvr/pvr.filmon"
 
-[[ ${PV} == *9999 ]] || KEYWORDS="~amd64"
-
 DEPEND="dev-libs/jsoncpp"
 
 RDEPEND="${DEPEND}"
