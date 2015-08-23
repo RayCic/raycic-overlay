@@ -28,33 +28,37 @@ upstream_pn=${upstream_pn//-/.}
 
 EGIT_REPO_URI="https://github.com/kodi-pvr/${upstream_pn}.git"
 
-local my_depend=""
-
 case "${PV:-0}" in
 	"15.9999")
 		EGIT_BRANCH="Isengard"
-		my_depend="=media-tv/kodi-15*"
+		DEPEND="=media-tv/kodi-15*"
 		;;
 	"9999")
-		my_depend="=media-tv/kodi-9999"
+		DEPEND="=media-tv/kodi-9999"
 		;;
 	*)
 		die "Version=\"${PV}\" is not supported"
 		;;
 esac
 
+# handled by cmake-utils
 IUSE="debug"
+
+# all packages originate from same source with same license
 LICENSE="GPL-2+"
+
+# media-tv/kodi is not slotted so there is no reason to slot plugins
 SLOT="0"
 
-DEPEND="dev-libs/kodi-platform
-	${my_depend}"
+DEPEND="${DEPEND}
+	dev-libs/kodi-platform"
 
 RDEPEND="${DEPEND}
 	!media-plugins/xbmc-addon-pvr"
 
 EXPORT_FUNCTIONS src_configure src_prepare
 
+# Fix some build system problems
 kodi-pvr-plugins_src_configure() {
 	local mycmakeargs=(
 		# Fix LIBDIR from media-tv/kodi
@@ -65,43 +69,43 @@ kodi-pvr-plugins_src_configure() {
 }
 
 # Delete unneeded LINGUAS and warn about unsupported
+# Cases:
+#   1) LINGUAS unset or empty - install all languages supported by upstream
+#   2) LINGUAS fully consist of things not recongnized as supported languages -
+#        all languages are deleted and not recongnized substrings are displayed.
+#   3) LINGUAS contains at least one or more supported by upstream languages -
+#        all recognized languages are installed and other are deleted.
+#        Not recongnized language substrings are displayed.
 kodi-pvr-plugins_src_prepare() {
+	[ -z "${LINGUAS}" ] && return
+
 	local langdir="${upstream_pn}/resources/language"
 
-	if [ -d "${langdir}" ]; then
+	[ ! -d "$langdir" ] && ewarn "Upstream do not support LINGUAS at all" && return
 
-		cd "${langdir}" || die
+	cd "$langdir" || die
 
-		[ -z "${LINGUAS}" ] && ewarn "LINGUAS variable not defined or empty - all language files will be deleted"
+	local found_linguas=""
 
-		shopt -s nocasematch
-
-		local found_linguas=""
-
-		for f in resource.language.*; do
-			local lang=${f#resource.language.}
-			local found=0
-
-			for l in ${LINGUAS}; do
-				if [[ ${lang} == ${l}* ]]; then
-					found=1
-					found_linguas+=" $l "
-				fi
-			done
-
-			[ ${found} -eq 1 ] || rm -rf "$f" || die
-		done
-
-		shopt -u nocasematch
-
-		local not_found_linguas=""
+	for f in resource.language.*; do
+		local lang=${f#resource.language.}
+		local found=0
 
 		for l in ${LINGUAS}; do
-			[[ $found_linguas =~ " $l " ]] || not_found_linguas+=" $l"
+			if [[ ${lang} == ${l,,}* ]]; then
+				found=1
+				found_linguas+="$l "
+			fi
 		done
 
-		[ -z "${not_found_linguas}" ] || ewarn "Not supported LINGUAS:${not_found_linguas}"
-	else
-		ewarn "Upstream do not support LINGUAS at all"
-	fi
+		[ ${found} -eq 1 ] || rm -rf "$f" || die
+	done
+
+	local not_found_linguas=""
+
+	for l in ${LINGUAS}; do
+		has ${l} ${found_linguas} || not_found_linguas+=" $l"
+	done
+
+	[ -z "${not_found_linguas}" ] || ewarn "Not supported LINGUAS:${not_found_linguas}"
 }
