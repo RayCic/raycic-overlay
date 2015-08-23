@@ -58,22 +58,12 @@ RDEPEND="${DEPEND}
 EXPORT_FUNCTIONS src_configure src_prepare
 
 kodi-pvr-plugins_src_configure() {
-	local mycmakeargs=()
-
-	# Fix LIBDIR from media-tv/kodi
-	mycmakeargs+=(
+	local mycmakeargs=(
+		# Fix LIBDIR from media-tv/kodi
 		-DCMAKE_INSTALL_LIBDIR="${EPREFIX}"/usr/$(get_libdir)/kodi
-	)
 
-	if use debug; then
-		mycmakeargs+=(
-			-DCMAKE_BUILD_TYPE=Debug
-		)
-	else
-		mycmakeargs+=(
-			-DCMAKE_BUILD_TYPE=Release
-		)
-	fi
+		-DCMAKE_BUILD_TYPE=$(usex debug Debug Release)
+	)
 
 	cmake-utils_src_configure
 }
@@ -84,7 +74,7 @@ kodi-pvr-plugins_src_prepare() {
 
 	if [ -d "${langdir}" ]; then
 
-		cd "${langdir}"
+		cd "${langdir}" || die
 
 		shopt -s nocasematch
 

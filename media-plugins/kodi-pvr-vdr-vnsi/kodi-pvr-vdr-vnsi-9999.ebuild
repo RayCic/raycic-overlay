@@ -20,42 +20,14 @@ DEPEND="media-tv/kodi[opengl?,gles?]
 RDEPEND="${DEPEND}"
 
 src_configure() {
-	local mycmakeargs=()
-
-	# Fix LIBDIR from media-tv/kodi
-	mycmakeargs+=(
+	local mycmakeargs=(
+		# Fix LIBDIR from media-tv/kodi
 		-DCMAKE_INSTALL_LIBDIR="${EPREFIX}"/usr/$(get_libdir)/kodi
+
+		-DCMAKE_BUILD_TYPE=$(usex debug Debug Release)
+		-DOPENGL_FOUND=$(usex opengl TRUE FALSE)
+		-DOPENGLES2_FOUND=$(usex gles TRUE FALSE)
 	)
-
-	if use debug; then
-		mycmakeargs+=(
-			-DCMAKE_BUILD_TYPE=Debug
-		)
-	else
-		mycmakeargs+=(
-			-DCMAKE_BUILD_TYPE=Release
-		)
-	fi
-
-	if use opengl; then
-		mycmakeargs+=(
-			-DOPENGL_FOUND=TRUE
-		)
-	else
-		mycmakeargs+=(
-			-DOPENGL_FOUND=FALSE
-		)
-	fi
-
-	if use gles; then
-		mycmakeargs+=(
-			-DOPENGLES2_FOUND=TRUE
-		)
-	else
-		mycmakeargs+=(
-			-DOPENGLES2_FOUND=FALSE
-		)
-	fi
 
 	cmake-utils_src_configure
 }
