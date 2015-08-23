@@ -10,7 +10,7 @@
 # The kodi-pvr-plugins eclass contains miscellaneous, useful functions for Kodi PVR plugin packages.
 #
 
-inherit cmake-utils
+inherit git-r3 cmake-utils
 
 case "${EAPI:-0}" in
 	5)
@@ -26,19 +26,17 @@ esac
 upstream_pn=${PN#kodi-}
 upstream_pn=${upstream_pn//-/.}
 
+EGIT_REPO_URI="https://github.com/kodi-pvr/${upstream_pn}.git"
+
 local my_depend=""
 
 case "${PV:-0}" in
 	"15.9999")
-		EGIT_REPO_URI="https://github.com/kodi-pvr/${upstream_pn}.git"
 		EGIT_BRANCH="Isengard"
 		my_depend="=media-tv/kodi-15*"
-		inherit git-r3
 		;;
 	"9999")
-		EGIT_REPO_URI="https://github.com/kodi-pvr/${upstream_pn}.git"
 		my_depend="=media-tv/kodi-9999"
-		inherit git-r3
 		;;
 	*)
 		die "Version=\"${PV}\" is not supported"
