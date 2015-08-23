@@ -72,6 +72,8 @@ kodi-pvr-plugins_src_prepare() {
 
 		cd "${langdir}" || die
 
+		[ -z "${LINGUAS}" ] && ewarn "LINGUAS variable not defined or empty - all language files will be deleted"
+
 		shopt -s nocasematch
 
 		local found_linguas=""
@@ -83,11 +85,11 @@ kodi-pvr-plugins_src_prepare() {
 			for l in ${LINGUAS}; do
 				if [[ ${lang} == ${l}* ]]; then
 					found=1
-					found_linguas+=" ${l}"
+					found_linguas+=" $l "
 				fi
 			done
 
-			[ ${found} -eq 1 ] || rm -rf "${f}" || die
+			[ ${found} -eq 1 ] || rm -rf "$f" || die
 		done
 
 		shopt -u nocasematch
@@ -95,15 +97,11 @@ kodi-pvr-plugins_src_prepare() {
 		local not_found_linguas=""
 
 		for l in ${LINGUAS}; do
-			for f in ${found_linguas}; do
-				[ "${l}" == "${f}" ] && continue 2
-			done
-
-			not_found_linguas+=" ${l}"
+			[[ $found_linguas =~ " $l " ]] || not_found_linguas+=" $l"
 		done
 
 		[ -z "${not_found_linguas}" ] || ewarn "Not supported LINGUAS:${not_found_linguas}"
 	else
-		ewarn "Ebuild do not support LINGUAS at all"
+		ewarn "Upstream do not support LINGUAS at all"
 	fi
 }
