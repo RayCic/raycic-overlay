@@ -59,8 +59,6 @@ kodi-pvr-plugins_src_configure() {
 	local mycmakeargs=(
 		# Fix LIBDIR from media-tv/kodi
 		-DCMAKE_INSTALL_LIBDIR="${EPREFIX}"/usr/$(get_libdir)/kodi
-
-		-DCMAKE_BUILD_TYPE=$(usex debug Debug Release)
 	)
 
 	cmake-utils_src_configure

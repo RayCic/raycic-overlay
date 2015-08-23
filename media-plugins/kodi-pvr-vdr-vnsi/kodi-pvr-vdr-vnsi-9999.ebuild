@@ -24,7 +24,6 @@ src_configure() {
 		# Fix LIBDIR from media-tv/kodi
 		-DCMAKE_INSTALL_LIBDIR="${EPREFIX}"/usr/$(get_libdir)/kodi
 
-		-DCMAKE_BUILD_TYPE=$(usex debug Debug Release)
 		-DOPENGL_FOUND=$(usex opengl TRUE FALSE)
 		-DOPENGLES2_FOUND=$(usex gles TRUE FALSE)
 	)
