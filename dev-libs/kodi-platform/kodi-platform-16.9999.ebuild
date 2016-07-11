@@ -9,12 +9,13 @@ inherit git-r3 cmake-utils
 DESCRIPTION="Kodi platform support library"
 HOMEPAGE="https://github.com/xbmc/kodi-platform"
 
+EGIT_BRANCH="Jarvis"
 EGIT_REPO_URI="https://github.com/xbmc/kodi-platform.git"
 
 LICENSE="GPL-2+"
 SLOT="0"
 
-RDEPEND="=media-tv/kodi-9999"
+RDEPEND="=media-tv/kodi-16*"
 
 DEPEND="${RDEPEND}
-	=dev-libs/libplatform-2*"
+	=dev-libs/libplatform-1*"

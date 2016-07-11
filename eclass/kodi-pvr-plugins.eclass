@@ -31,10 +31,17 @@ EGIT_REPO_URI="https://github.com/kodi-pvr/${upstream_pn}.git"
 case "${PV:-0}" in
 	"15.9999")
 		EGIT_BRANCH="Isengard"
-		DEPEND="=media-tv/kodi-15*"
+		DEPEND="=media-tv/kodi-15*
+			=dev-libs/kodi-platform-15*"
+		;;
+	"16.9999")
+		EGIT_BRANCH="Jarvis"
+		DEPEND="=media-tv/kodi-16*
+			=dev-libs/kodi-platform-16*"
 		;;
 	"9999")
-		DEPEND="=media-tv/kodi-9999"
+		DEPEND="=media-tv/kodi-9999
+			=dev-libs/kodi-platform-9999"
 		;;
 	*)
 		die "Version=\"${PV}\" is not supported"
@@ -49,9 +56,6 @@ LICENSE="GPL-2+"
 
 # media-tv/kodi is not slotted so there is no reason to slot plugins
 SLOT="0"
-
-DEPEND="${DEPEND}
-	dev-libs/kodi-platform"
 
 RDEPEND="${DEPEND}
 	!media-plugins/xbmc-addon-pvr"
