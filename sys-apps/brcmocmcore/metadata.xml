@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>ray@apollo.lv</email>
+		<name>Raimonds Cicans</name>
+	</maintainer>
+	<use>
+		<flag name="rhe">Use Red Hat Enterprise Linux 7 archives as a source</flag>
+		<flag name="sles">Use SUSE Linux Enterprise Server 12 Service Pack 2 archives as a source</flag>
+	</use>
+</pkgmetadata>

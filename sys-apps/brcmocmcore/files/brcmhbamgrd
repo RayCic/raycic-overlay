@@ -1,0 +1,12 @@
+#!/sbin/openrc-run
+# Copyright 1999-2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+description="OCManager Remote Host Bus Adapter Manager"
+pidfile="/run/brcmhbamgrd.pid"
+command="/opt/broadcom/brcmocmanager/sbin/brcmhbamgrd"
+
+depend() {
+	need localmount
+	after modules-load
+}

@@ -1,0 +1,17 @@
+GroupByHost:true
+GroupByFabric:false
+GroupByVport:false
+LocalHBAsOnly:false
+AdvancedMode:false
+ToolTips:false
+ScreenPosX:-1
+ScreenPosY:-1
+FrameWidth:1069
+FrameHeight:810
+MainSplitterPosition:329.0
+ShowToolBar:true
+ShowStatusBar:true
+DisplayIscsiName:false
+DisplayIscsiAlias:false
+ShowHostGroups:false
+HostGroup:All

@@ -1,0 +1,8 @@
+TcpSocketPortNumber:23334
+ClientRemoteOperation:disabled
+ClientOperationMode:enabled
+ClientReadOnlyOperation:disabled
+DISC_INTERVAL:15
+EXP_TIME:1800
+OOB_DISC_INTERVAL:45
+AUTOSTART:false

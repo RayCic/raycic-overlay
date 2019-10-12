@@ -1,0 +1,8 @@
+[Unit]
+Description=OCManager Remote Host Bus Adapter Manager
+
+[Service]
+ExecStart=/opt/broadcom/brcmocmanager/sbin/brcmhbamgrd
+
+[Install]
+WantedBy=multi-user.target

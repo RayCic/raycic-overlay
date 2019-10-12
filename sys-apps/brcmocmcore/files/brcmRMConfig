@@ -1,0 +1,10 @@
+RepositoryDir:/var/cache/broadcom/brcmocmanager/RMRepository
+LastFWDir:/var/cache/broadcom/brcmocmanager/RMRepository
+LogFilePath:/var/log/broadcom/brcmocmanager/rm.log
+ConfFilePath:/etc/broadcom/brcmocmanager/rm.conf
+AdapterSet:LP101,LPe111
+ServerRemoteOperation:disabled
+MngmtHostIpAddress:
+ExclusiveHostMgmnt:false
+ManagementHost:false
+SecureManagement:disabled

@@ -1,0 +1,11 @@
+[Unit]
+Description=Script to reset all Emulex HBAs
+Before=network-pre.target
+Wants=network-pre.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/broadcom/brcmocmanager/sbin/brcm-reset-all-hbas.sh
+
+[Install]
+WantedBy=multi-user.target

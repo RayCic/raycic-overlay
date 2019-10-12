@@ -1,0 +1,23 @@
+#!/sbin/openrc-run
+# Copyright 1999-2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+description="Script to reset all Emulex HBAs"
+command="/opt/broadcom/brcmocmanager/sbin/brcm-reset-all-hbas.sh"
+
+depend() {
+	need localmount
+	after modules-load
+	before net
+}
+
+start() {
+	ebegin "Initializing all Emulex HBAs"
+	${command} >/dev/null 2>&1
+	eend $?
+}
+
+stop() {
+	# Nothing to stop
+	return 0;
+}
