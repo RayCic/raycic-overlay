@@ -13,7 +13,7 @@ LICENSE="Apache-2.0 BSD BSD-2 CC-BY-SA-4.0 ISC MIT MPL-2.0"
 SLOT="0"
 
 KEYWORDS="~amd64"
-IUSE="apparmor btrfs +rootless selinux"
+IUSE="apparmor btrfs device-mapper +rootless selinux"
 RESTRICT="test"
 
 COMMON_DEPEND="
@@ -22,11 +22,11 @@ COMMON_DEPEND="
 	>=app-emulation/runc-1.0.0_rc6
 	dev-libs/libassuan:=
 	dev-libs/libgpg-error:=
-	sys-fs/lvm2
 	sys-libs/libseccomp:=
 
 	apparmor? ( sys-libs/libapparmor )
 	btrfs? ( sys-fs/btrfs-progs )
+	device-mapper? ( sys-fs/lvm2 )
 	rootless? ( app-emulation/slirp4netns )
 	selinux? ( sys-libs/libselinux:= )
 "
@@ -39,10 +39,17 @@ src_compile() {
 	# Filter unsupported linker flags
 	filter-flags '-Wl,*'
 
+	local buildtags=(
+		$(usev apparmor)
+		$(usev selinux)
+		$(usex btrfs '' exclude_graphdriver_btrfs)
+		$(usex device-mapper '' exclude_graphdriver_devicemapper)
+	)
+
 	export -n GOCACHE XDG_CACHE_HOME
 	GOBIN="${S}/bin" \
 		emake all \
-			BUILDTAGS="$(usev apparmor) $(usev selinux) $(usex btrfs '' exclude_graphdriver_btrfs)"
+			BUILDTAGS="$buildtags"
 }
 
 src_install() {
