@@ -37,17 +37,6 @@ DEPEND="
 	dev-go/go-md2man"
 RDEPEND="${COMMON_DEPEND}"
 
-src_prepare() {
-	default
-
-	# Disable installation of python modules here, since those are
-	# installed by separate ebuilds.
-	sed -e '/^GIT_.*/d' \
-		-e 's/$(GO) build/$(GO) build -v -work -x/' \
-		-e 's/^\(install:.*\) install\.python$/\1/' \
-		-i Makefile || die
-}
-
 src_compile() {
 	# Filter unsupported linker flags
 	filter-flags '-Wl,*'
