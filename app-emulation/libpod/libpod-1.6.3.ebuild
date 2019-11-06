@@ -41,35 +41,14 @@ src_compile() {
 	# Filter unsupported linker flags
 	filter-flags '-Wl,*'
 
-	[[ -f hack/apparmor_tag.sh ]] || die
-	if use apparmor; then
-		echo -e "#!/bin/sh\necho apparmor" > hack/apparmor_tag.sh || die
-	else
-		echo -e "#!/bin/sh\ntrue" > hack/apparmor_tag.sh || die
-	fi
-
-	[[ -f hack/btrfs_installed_tag.sh ]] || die
-	if use btrfs; then
-		echo -e "#!/bin/sh\ntrue" > hack/btrfs_installed_tag.sh || die
-	else
-		echo -e "#!/bin/sh\necho exclude_graphdriver_btrfs" > \
-			hack/btrfs_installed_tag.sh || die
-	fi
-
-	[[ -f hack/selinux_tag.sh ]] || die
-	if use selinux; then
-		echo -e "#!/bin/sh\necho selinux" > hack/selinux_tag.sh || die
-	else
-		echo -e "#!/bin/sh\ntrue" > hack/selinux_tag.sh || die
-	fi
-
 	export -n GOCACHE XDG_CACHE_HOME
 	GOBIN="${S}/bin" \
 		emake all \
 			GIT_BRANCH=master \
 			GIT_BRANCH_CLEAN=master \
 			COMMIT_NO="${EGIT_COMMIT}" \
-			GIT_COMMIT="${EGIT_COMMIT}"
+			GIT_COMMIT="${EGIT_COMMIT}" \
+			BUILDTAGS="$(usev apparmor) $(usev selinux) $(usex btrfs '' exclude_graphdriver_btrfs)"
 }
 
 src_install() {
