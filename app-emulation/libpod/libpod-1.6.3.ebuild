@@ -3,13 +3,12 @@
 
 EAPI=7
 
-EGIT_COMMIT="9d087f6a766259ba53b224944f1b7b778035c370"
-
-inherit bash-completion-r1 flag-o-matic go-module
+inherit bash-completion-r1 flag-o-matic go-module git-r3
 
 DESCRIPTION="Library and podman tool for running OCI-based containers in Pods"
 HOMEPAGE="https://github.com/containers/libpod/"
-SRC_URI="https://github.com/containers/libpod/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+EGIT_COMMIT="v${PV}"
+EGIT_REPO_URI="https://github.com/containers/libpod.git"
 LICENSE="Apache-2.0 BSD BSD-2 CC-BY-SA-4.0 ISC MIT MPL-2.0"
 SLOT="0"
 
@@ -44,10 +43,6 @@ src_compile() {
 	export -n GOCACHE XDG_CACHE_HOME
 	GOBIN="${S}/bin" \
 		emake all \
-			GIT_BRANCH=master \
-			GIT_BRANCH_CLEAN=master \
-			COMMIT_NO="${EGIT_COMMIT}" \
-			GIT_COMMIT="${EGIT_COMMIT}" \
 			BUILDTAGS="$(usev apparmor) $(usev selinux) $(usex btrfs '' exclude_graphdriver_btrfs)"
 }
 
