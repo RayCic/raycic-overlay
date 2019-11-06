@@ -39,13 +39,12 @@ src_compile() {
 	# Filter unsupported linker flags
 	filter-flags '-Wl,*'
 
-	local buildtags=(
-		$(usev apparmor)
-		$(usev selinux)
-		$(usev varlink)
-		$(usex btrfs '' exclude_graphdriver_btrfs)
-		$(usex device-mapper '' exclude_graphdriver_devicemapper)
-	)
+	local buildtags=""
+	buildtags+="$(usev apparmor) "
+	buildtags+="$(usev selinux) "
+	buildtags+="$(usev varlink) "
+	buildtags+="$(usex btrfs '' exclude_graphdriver_btrfs) "
+	buildtags+="$(usex device-mapper '' exclude_graphdriver_devicemapper) "
 
 	export -n GOCACHE XDG_CACHE_HOME
 	GOBIN="${S}/bin" \
