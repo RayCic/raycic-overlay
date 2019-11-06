@@ -13,7 +13,7 @@ LICENSE="Apache-2.0 BSD BSD-2 CC-BY-SA-4.0 ISC MIT MPL-2.0"
 SLOT="0"
 
 KEYWORDS="~amd64"
-IUSE="apparmor btrfs device-mapper +rootless selinux"
+IUSE="apparmor btrfs device-mapper +rootless selinux +varlink"
 RESTRICT="test"
 
 COMMON_DEPEND="
@@ -42,6 +42,7 @@ src_compile() {
 	local buildtags=(
 		$(usev apparmor)
 		$(usev selinux)
+		$(usev varlink)
 		$(usex btrfs '' exclude_graphdriver_btrfs)
 		$(usex device-mapper '' exclude_graphdriver_devicemapper)
 	)

@@ -26,6 +26,9 @@
 		<flag name="rootless">
 			Enables dependencies for running in rootless mode.
 		</flag>
+		<flag name="varlink">
+			Add support for varlink interface description format and protocol.
+		</flag>
 	</use>
 	<upstream>
 		<remote-id type="github">containers/libpod</remote-id>
