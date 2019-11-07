@@ -47,7 +47,7 @@ src_compile() {
 	buildtags+="$(usex device-mapper '' exclude_graphdriver_devicemapper) "
 
 	export -n GOCACHE XDG_CACHE_HOME
-	GOBIN="${S}/bin" \
+	GOPATH="${S}/_output" \
 		emake all \
 			BUILDTAGS="$buildtags"
 }
