@@ -64,6 +64,8 @@ src_configure() {
 		$(usex lcd		"--enable LCDSUPPORT"		"")		\
 		$(usex led		"--enable LEDSUPPORT"		"")		\
 		$(usex clockfix		"--enable CLOCKFIX"		"")		\
+		$(usex cacheex		"--enable CS_CACHEEX"		"")		\
+		$(usex cw_cycle_check	"--enable CW_CYCLE_CHECK"	"")		\
 											\
 		$(usex protocol_camd33		"--enable MODULE_CAMD33"	"")	\
 		$(usex protocol_camd35		"--enable MODULE_CAMD35"	"")	\
