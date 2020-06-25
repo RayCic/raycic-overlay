@@ -36,6 +36,8 @@ IUSE="${IUSE_PROTOCOLS} ${IUSE_READERS} ${IUSE_CARDREADERS}
 # dvbapi www (WEBIF) jquery ipv6 livelog touch ssl debug monitor loadbalancing lcd led clockfix
 
 RDEPEND="dev-libs/openssl
+	acct-group/oscam
+	acct-user/oscam
 	usb? ( virtual/libusb:1 )
 	pcsc? ( sys-apps/pcsc-lite )"
 DEPEND="${RDEPEND}"

@@ -14,7 +14,7 @@ start() {
 	[ -z $WATCHDOG ] && killall -q oscam_watchdog.sh
 	[ -f ${PIDFILE} ] && rm -f ${PIDFILE}
 	export MALLOC_CHECK_=0
-	start-stop-daemon --start --quiet --exec ${DAEMONPATH} -- -b ${_OSCAM_OPTS}
+	start-stop-daemon --start --quiet --user oscam:oscam --exec ${DAEMONPATH} -- -b ${_OSCAM_OPTS}
 	ebegin "Starting Watchdog for ${DESCRIPTION}"
 	/usr/bin/oscam_watchdog.sh &
 	eend $?
