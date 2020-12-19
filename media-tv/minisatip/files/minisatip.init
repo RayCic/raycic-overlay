@@ -1,0 +1,11 @@
+#!/sbin/openrc-run
+# Copyright 1999-2020 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+command="/usr/bin/minisatip"
+command_args="${MINISATIP_PARAM}"
+pidfile="/var/run/${SVCNAME}.pid"
+
+depend() {
+	use localmount modules net
+}
