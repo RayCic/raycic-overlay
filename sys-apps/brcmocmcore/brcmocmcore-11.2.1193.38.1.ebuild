@@ -8,7 +8,7 @@ inherit emulex systemd
 DESCRIPTION="OCManager Command Line Interface"
 
 RDEPEND="sys-libs/brcmocmcorelibs:0/${PV}[rhe=,sles=]
-	sys-apps/hbaapi
+	sys-libs/hbaapiwrapper
 "
 
 S="${WORKDIR}"
