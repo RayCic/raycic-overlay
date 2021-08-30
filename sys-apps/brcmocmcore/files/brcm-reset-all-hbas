@@ -1,9 +1,27 @@
 #!/sbin/openrc-run
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 description="Script to reset all Emulex HBAs"
 command="/opt/broadcom/brcmocmanager/sbin/brcm-reset-all-hbas.sh"
+
+extra_commands="checkconfig"
+description_checkconfig="Check for valid config file"
+
+checkconfig() {
+	if [ ! -f /etc/hba.conf ] ; then
+		eerror "File /etc/hba.conf not found"
+		return 1
+	fi
+	if ! egrep -qs '^com.brcmcna.brcmapilibrary64' /etc/hba.conf ] ; then
+		eerror "Emulex HBA in /etc/hba.conf not found"
+		return 1
+	fi
+}
+
+start_pre() {
+	checkconfig || return 1
+}
 
 depend() {
 	need localmount
