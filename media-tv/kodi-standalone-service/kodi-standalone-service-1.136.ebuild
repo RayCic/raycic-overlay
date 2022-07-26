@@ -20,6 +20,8 @@ DEPEND="acct-group/kodi
         acct-user/kodi
 "
 
+RDEPEND="${DEPEND}"
+
 src_compile() {
         true
 }
