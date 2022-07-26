@@ -7,5 +7,6 @@ inherit acct-user
 
 ACCT_USER_ID=777
 ACCT_USER_GROUPS=( kodi )
+ACCT_USER_HOME=/var/lib/kodi
 
 acct-user_add_deps
