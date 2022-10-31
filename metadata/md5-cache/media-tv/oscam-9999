@@ -1,0 +1,15 @@
+BDEPEND=dev-vcs/subversion[http(+)] net-misc/rsync virtual/pkgconfig
+DEFINED_PHASES=compile configure install postinst preinst prepare unpack
+DEPEND=dev-libs/openssl acct-group/oscam acct-user/oscam usb? ( virtual/libusb:1 ) pcsc? ( sys-apps/pcsc-lite )
+DESCRIPTION=OSCam is an Open Source Conditional Access Module software
+EAPI=7
+HOMEPAGE=http://www.streamboard.tv/wiki/OSCam/en
+INHERIT=subversion systemd
+IUSE=protocol_camd33 protocol_camd35 protocol_camd35_tcp protocol_cccam protocol_cccshare protocol_constcw protocol_gbox protocol_ghttp protocol_newcamd protocol_pandora protocol_radegast protocol_scam protocol_serial reader_bulcrypt reader_conax reader_cryptoworks reader_dgcrypt reader_dre reader_griffin reader_irdeto reader_nagra reader_nagra_merlin reader_seca reader_tongfang reader_viaccess reader_videoguard cardreader_db2com cardreader_drecas cardreader_internal cardreader_mp35 cardreader_phoenix cardreader_sc8in1 cardreader_smargo cardreader_stapi cardreader_stapi5 cardreader_stinger +anticasc cacheex cw_cycle_check debug +dvbapi ipv6 irdeto_guessing lcd led loadbalancing +monitor pcsc +reader +ssl touch usb +www jquery livelog clockfix read_sdt_charsets
+LICENSE=GPL-2
+PROPERTIES=live
+RDEPEND=dev-libs/openssl acct-group/oscam acct-user/oscam usb? ( virtual/libusb:1 ) pcsc? ( sys-apps/pcsc-lite )
+RESTRICT=mirror strip
+SLOT=0
+_eclasses_=estack	055c42df72f76a4f45ec92b35e83cd56	subversion	dee31e56422214d05644c2a3c900a148	toolchain-funcs	441f754fd75cd4fd1fa06fbc17da6144	multilib	5ca4e49abed8e3a2f7b56920eadee157	systemd	5f4bb0758df2e483babf68cd517078ca
+_md5_=f7381a246b1321ec5c79df3ae2dc0744

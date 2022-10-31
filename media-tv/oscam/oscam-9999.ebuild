@@ -31,9 +31,7 @@ for cardreader in ${CARD_READERS}; do
 done
 
 IUSE="${IUSE_PROTOCOLS} ${IUSE_READERS} ${IUSE_CARDREADERS}
-	+anticasc cacheex cw_cycle_check debug +dvbapi ipv6 irdeto_guessing lcd led loadbalancing +monitor pcsc +reader +ssl touch usb +www jquery livelog clockfix"
-
-# dvbapi www (WEBIF) jquery ipv6 livelog touch ssl debug monitor loadbalancing lcd led clockfix
+	+anticasc cacheex cw_cycle_check debug +dvbapi ipv6 irdeto_guessing lcd led loadbalancing +monitor pcsc +reader +ssl touch usb +www jquery livelog clockfix read_sdt_charsets"
 
 RDEPEND="dev-libs/openssl
 	acct-group/oscam
@@ -68,6 +66,7 @@ src_configure() {
 		$(usex clockfix		"--enable CLOCKFIX"		"")		\
 		$(usex cacheex		"--enable CS_CACHEEX"		"")		\
 		$(usex cw_cycle_check	"--enable CW_CYCLE_CHECK"	"")		\
+		$(usex read_sdt_charsets	"--enable READ_SDT_CHARSETS"	"")		\
 											\
 		$(usex protocol_camd33		"--enable MODULE_CAMD33"	"")	\
 		$(usex protocol_camd35		"--enable MODULE_CAMD35"	"")	\
